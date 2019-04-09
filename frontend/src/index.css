@@ -8,7 +8,153 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  font-family: Roboto;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+li {
+  list-style: none;
+}
+
+.head{
+  position: absolute;
+  width: 100%;
+  height: 117px;
+  left: 0px;
+  top: 0px;
+  background: #7AB2E7;
+  text-align: center;
+}
+
+.head h1{
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 48px;
+  line-height: normal;
+  color: #FFFFFF;
+}
+
+.nav{
+  position: absolute;
+  width: 85%;
+  height: 29px;
+  left: 171px;
+  top: 158px;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: normal;
+
+  color: #727272;
+}
+
+.nav .selected{
+  color: #000000;
+}
+
+.nav:hover{
+  cursor: pointer;
+}
+
+
+button:hover{
+  cursor: pointer;
+}
+
+.container-btn-category{
+  margin-top: -30px;
+  margin-left: 1350px;
+
+  position: absolute;
+}
+
+.container-btn-category button{
+    border: none;
+    width: 83px;
+    height: 26px;
+    background: #F0EDED;
+    margin-right: 20px;
+}
+
+.write-btn{
+  position: absolute;
+  margin-top: 30px;
+  margin-left: -165px;
+  background: none;
+  border: none;
+}
+
+.post{
+  position: relative;
+  width: 1540px;
+  height: auto;
+  left: 171px;
+  top: 228px;
+  padding: 20px 48px;
+  padding-top: 1px;
+  margin-bottom: 30px;
+
+  background: #F9F9F9;
+  border-radius: 25px;
+}
+
+.title-post {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: normal;
+}
+
+.date-post{
+  margin-top: -25px;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: normal;
+  color: #727272;
+}
+
+.title-ctg ul{
+  float: right;
+  margin-top: -45px;
+  margin-right: 48px;
+}
+
+.title-ctg li{
+  background-color: #FFFFFF;
+  width: 65px;
+  padding-left: 20px;
+  padding-top: 6px;
+  padding-bottom:6px;
+  font-size: 12px;
+}
+
+.post-text{
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.bottom-post p{
+  float: right;
+  margin-top: 1px;
+  font-size: 12px;
+}
+
+.upvote, .downvote, .vote{
+  font-size: 24px;
+}
+
+.bottom-post span:hover{
+  cursor: pointer;
 }
