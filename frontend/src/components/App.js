@@ -5,6 +5,8 @@ import Dashboard from './Dashboard'
 import Comment from './Comment'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { Link, withRouter} from 'react-router-dom'
 
 class App extends Component {
   componentDidMount() {
@@ -13,26 +15,26 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-
-        <div className='head'>
-          <h1>READABLE</h1>
+      <Router>
+        <div>
+          <Nav />
+          {this.props.loading === true
+            ? null
+            :
+            <div>
+              <Route path='/' component={Dashboard} />
+            </div>
+          }
         </div>
-        <Nav />
-
-        {this.props.loading === true
-          ? null
-          : <Dashboard />
-        }
-      </div>
+      </Router>
     );
   }
 }
 
-function mapStateToProps ({ posts }) {
+function mapStateToProps ({ posts, categories }) {
   return {
-    loading: posts === null
+    loading: posts === null,
   }
 }
 
-export default connect()(App)
+export default connect(mapStateToProps)(App)

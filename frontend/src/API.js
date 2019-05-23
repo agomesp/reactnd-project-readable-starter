@@ -13,7 +13,7 @@ export const getAllPosts = () =>
 export const getAllCategories = () =>
   fetch('http://localhost:3001/categories', { headers })
     .then(res => res.json())
-    .then(data => data)
+    .then(data => data.categories)
 
 export function getInitialData () {
   return Promise.all ([
@@ -43,3 +43,8 @@ export const postVote = (id, option) =>
 		})
 	}).then(res => res.json())
 .then(post => post)
+
+export const getPostCategorie = (categorie) =>
+  fetch(`${api}/${categorie}/posts`, { headers })
+    .then(res => res.json())
+    .then(data => data)

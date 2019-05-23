@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getPost } from '../API.js'
 import { formatDate } from '../helpers.js'
 import { handleVote } from '../actions/posts'
 
@@ -41,10 +40,6 @@ class Post extends Component {
           </div>
     )
   }
-}
-
-function mapStateToProps ([ post ])  {
-  return post
 }
 
 export default connect()(Post)
