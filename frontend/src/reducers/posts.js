@@ -5,10 +5,7 @@ import { VOTE_POST } from '../actions/posts'
 export default function posts (state = {}, action) {
   switch (action.type) {
     case RECEIVE_POSTS:
-      return{
-        ...state,
-        ...action.posts
-      }
+      return action.posts
 
     case RECEIVE_POST:
       return {
@@ -17,11 +14,14 @@ export default function posts (state = {}, action) {
       }
 
       case VOTE_POST:
-       return{
-         ...state,
-       //   Object.keys(state).map((key) => posts[key].id === action.id ? {voteScore: posts[key].voteScore + 1} : {voteScore})
-        ...action.posts
-      }
+        console.log('ação, votepost:', action)
+        return [
+          ...state.map(item => {
+            if(item.id === action.post.id) return action.post
+            return item
+            // item.id === action.post.id ? action.post : item
+          })
+        ]
 
     default:
       return state

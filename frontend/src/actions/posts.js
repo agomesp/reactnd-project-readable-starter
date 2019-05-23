@@ -19,18 +19,23 @@ export function receivePost (post) {
   }
 }
 
-export function votePost(posts){
+export function votePost(post){
   return {
     type: VOTE_POST,
-    posts
+    post
   }
 }
 
 export function handleVote(id, option){
   return (dispatch) => {
     return postVote(id, option)
-      .then(({ posts }) => {
-        dispatch(votePost(posts))
+      .then( post => {
+        console.log('posts:', post)
+        dispatch(votePost(post))
       })
+//       .then( data => {
+//   console.log('data:', data) // <----
+//   // dispatch(votePost(posts))
+// })
   }
 }

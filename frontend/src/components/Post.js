@@ -5,8 +5,19 @@ import { formatDate } from '../helpers.js'
 import { handleVote } from '../actions/posts'
 
 class Post extends Component {
-  processVote = (id, option)  => {
-    this.props.dispatch(handleVote(id,option))
+  state = {
+    lastOption: ''
+  }
+
+  processVote = (e)  => {
+    const id = this.props.post.id
+    const option = e.currentTarget.value
+
+    if(this.state.lastOption === '' || this.state.lastOption !== option){
+      this.props.dispatch(handleVote(id, option))
+      this.setState({lastOption: option})
+    }
+
   }
 
   render(){
@@ -15,7 +26,7 @@ class Post extends Component {
     return(
           <div className='post'>
             <div className='title-ctg'>
-              <p className='title-post'>{post.title}</p>
+              <p className='title-post'>{post.title} - by {post.author}</p>
               <p className='date-post'>{formatDate(post.timestamp)}</p>
               <ul>
                 <li>{post.category}</li>
@@ -23,7 +34,8 @@ class Post extends Component {
             </div>
             <p className='post-text'>{post.body}</p>
             <div className='bottom-post'>
-              <span className='upvote' onClick={this.processVote(post.id, 'upVote')}>^</span><span className='vote'> {post.voteScore} </span><span className='downvote'>v</span>
+              <button className='upvote' onClick={this.processVote} value='upVote'>^</button><span className='vote'> {post.voteScore} </span><button className='downvote' value='downVote' onClick={this.processVote}>v</button>
+              <span>{post.commentCount} comments</span>
               <p><span className='edit-post'>edit</span> | <span>delete</span></p>
             </div>
           </div>
@@ -31,5 +43,8 @@ class Post extends Component {
   }
 }
 
+function mapStateToProps ([ post ])  {
+  return post
+}
 
 export default connect()(Post)
