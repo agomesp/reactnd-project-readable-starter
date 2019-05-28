@@ -5,7 +5,7 @@ export const RECEIVE_POST = 'RECEIVE_POST'
 export const VOTE_POST = 'VOTE_POST'
 export const SORT_CATEGORIE = 'SORT_CATEGORIE'
 export const NEW_POST = 'NEW_POST'
-
+export const SORT_POSTS = 'SORT_POSTS'
 
 export function receivePosts (posts) {
   return {
@@ -35,10 +35,6 @@ export function handleVote(id, option){
         console.log('posts:', post)
         dispatch(votePost(post))
       })
-//       .then( data => {
-//   console.log('data:', data) // <----
-//   // dispatch(votePost(posts))
-// })
   }
 }
 
@@ -65,4 +61,15 @@ export function handleWrite(id, name, body, category, title){
         dispatch(newPost(post))
       })
     }
+}
+
+export function sortPost(posts){
+  return{
+    type: SORT_POSTS,
+    posts
+  }
+}
+
+export function handleSortDate(posts){
+  return(dispatch) => (dispatch(sortPost(posts)))
 }

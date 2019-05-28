@@ -3,15 +3,26 @@ import { connect } from 'react-redux'
 import { handleSortCategorie } from '../actions/categories'
 import { Link, withRouter } from 'react-router-dom'
 import NewPost from './NewPost'
+import { handleSortDate } from '../actions/posts'
 
 class Nav extends Component {
   state = {
-    writeClicked: false
+    writeClicked: false,
+    sorted: false
   }
 
   handleWriteClick = (e) => {
     e.preventDefault()
     this.setState({writeClicked: true})
+  }
+
+  handleSort = (e) => {
+    e.preventDefault()
+    const posts = this.props.posts
+    const postsSorted = Object.keys(posts).sort((a,b) => posts[b].timestamp - posts[a].timestamp)
+      .map((key) => posts[key])
+
+    this.props.dispatch(handleSortDate(postsSorted))
   }
 
 
@@ -27,7 +38,7 @@ class Nav extends Component {
           <a href='http://localhost:3000'><h1>READABLE</h1></a>
         </div>
         <div className='nav'>
-          <span className='selected'>New</span>
+          <span className='selected' onClick={this.handleSort}>New</span>
           <div className='container-btn-category'>
             {Object.keys(categories).map((key) => (
               <Link to={`/${categories[key].path}`} key={key}>
@@ -46,9 +57,10 @@ class Nav extends Component {
   }
 }
 
-function mapStateToProps({ categories }) {
+function mapStateToProps({ categories, posts }) {
   return {
-    categories
+    categories,
+    posts
   }
 }
 

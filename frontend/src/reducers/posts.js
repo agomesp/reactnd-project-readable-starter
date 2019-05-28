@@ -3,18 +3,13 @@ import { RECEIVE_POST } from '../actions/posts'
 import { VOTE_POST } from '../actions/posts'
 import { SORT_CATEGORIE } from '../actions/posts'
 import { NEW_POST } from '../actions/posts'
+import { SORT_POSTS } from '../actions/posts'
 
 
 export default function posts (state = {}, action) {
   switch (action.type) {
     case RECEIVE_POSTS:
       return action.posts
-
-    case RECEIVE_POST:
-      return {
-        ...state,
-        ...action.post
-      }
 
       case VOTE_POST:
         console.log('ação, votepost:', action)
@@ -34,6 +29,9 @@ export default function posts (state = {}, action) {
           ...state,
           action.post
         ]
+
+      case SORT_POSTS:
+        return action.posts
 
     default:
       return state

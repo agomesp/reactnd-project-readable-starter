@@ -38,7 +38,6 @@ function mapStateToProps ({ posts, categories }) {
   return {
     // postIds: Object.keys(posts).sort((a,b) => posts[b].timestamp - posts[a].timestamp)
     //   .map((key) => posts[key].id),
-    // posts:
     posts,
     categories
   }
