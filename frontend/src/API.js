@@ -48,3 +48,21 @@ export const getPostCategorie = (categorie) =>
   fetch(`${api}/${categorie}/posts`, { headers })
     .then(res => res.json())
     .then(data => data)
+
+export const writePost = (id, author, title, body, category, timestamp) =>
+	fetch(`${api}/posts`, {
+		method: 'POST',
+		headers: {
+			...headers,
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			id,
+      author,
+      title,
+      body,
+      category,
+      timestamp
+		})
+	}).then(res => res.json())
+    .then(post => post)

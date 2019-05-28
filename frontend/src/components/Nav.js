@@ -2,10 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { handleSortCategorie } from '../actions/categories'
 import { Link, withRouter } from 'react-router-dom'
+import NewPost from './NewPost'
 
 class Nav extends Component {
-  render() {
+  state = {
+    writeClicked: false
+  }
 
+  handleWriteClick = (e) => {
+    e.preventDefault()
+    this.setState({writeClicked: true})
+  }
+
+
+  render() {
     const sortCategorie = (e) => {
       this.props.dispatch(handleSortCategorie(e.currentTarget.value))
     }
@@ -26,7 +36,10 @@ class Nav extends Component {
             ))}
           </div>
 
-          <button className='write-btn'>write</button>
+          <button className='write-btn' onClick={this.handleWriteClick}>write</button>
+
+          {this.state.writeClicked ? <NewPost /> : <div></div>}
+
         </div>
       </div>
     );
