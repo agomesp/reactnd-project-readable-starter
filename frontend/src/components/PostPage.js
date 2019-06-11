@@ -24,7 +24,6 @@ class Post extends Component {
             <p className='post-text'>{post.body}</p>
             <div className='bottom-post'>
               <span>{post.commentCount} comments</span>
-              <p><span className='edit-post'>edit</span> | <span onClick={this.processDelete}>delete</span></p>
             </div>
           </div>
     )

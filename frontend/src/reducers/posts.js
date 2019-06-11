@@ -5,7 +5,8 @@ import { SORT_CATEGORIE } from '../actions/posts'
 import { NEW_POST } from '../actions/posts'
 import { SORT_POSTS } from '../actions/posts'
 import { DELETE_POST } from '../actions/posts'
-import {GET_POST} from '../actions/posts'
+import { GET_POST } from '../actions/posts'
+import { EDIT_POST } from '../actions/posts'
 
 export default function posts (state = {}, action) {
   switch (action.type) {
@@ -39,6 +40,15 @@ export default function posts (state = {}, action) {
 
       case GET_POST:
         return action.post
+
+      case EDIT_POST:
+        return [
+          ...state.map(item => {
+            if(item.id === action.post.id) return action.post
+            return item
+            // item.id === action.post.id ? action.post : item
+          })
+        ]
 
     default:
       return state

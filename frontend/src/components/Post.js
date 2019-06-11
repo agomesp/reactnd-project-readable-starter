@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { formatDate } from '../helpers.js'
-import { handleVote, handleDeletePost, handleGetPost } from '../actions/posts'
+import { handleVote, handleDeletePost, handleGetPost, handleEditPost} from '../actions/posts'
 import { Link, withRouter } from 'react-router-dom'
 
 class Post extends Component {
   state = {
-    lastOption: ''
+    lastOption: '',
+    editing: false
   }
 
   processVote = (e)  => {
@@ -30,6 +31,20 @@ class Post extends Component {
     this.props.dispatch(handleGetPost(this.props.post.id))
   }
 
+  showEdit = (e) => {
+    this.setState({editing: true})
+  }
+
+  processEdit = (e) => {
+    e.preventDefault()
+
+    const id = this.props.post.id
+    const body = document.getElementsByClassName('input-text')[0].value
+    const title = document.getElementsByClassName('input-subject')[0].value
+
+    this.props.dispatch(handleEditPost(id, title, body))
+  }
+
   render(){
     console.log('props:', this.props)
     const post = this.props.post
@@ -49,7 +64,19 @@ class Post extends Component {
             <div className='bottom-post'>
               <button className='upvote' onClick={this.processVote} value='upVote'>^</button><span className='vote'> {post.voteScore} </span><button className='downvote' value='downVote' onClick={this.processVote}>v</button>
               <span>{post.commentCount} comments</span>
-              <p><span className='edit-post'>edit</span> | <span onClick={this.processDelete}>delete</span></p>
+              <p><span className='edit-post' onClick={this.showEdit}>edit</span> | <span onClick={this.processDelete}>delete</span></p>
+              {this.state.editing === true
+                ?
+                <div>
+                  <form>
+                    <label>Title:</label><input type='text' className='input-subject' defaultValue={post.title}></input>
+                    <label>Text:</label><input type='text' className='input-text' defaultValue={post.body}></input>
+                    <button className='bnt-Submit' onClick={this.processEdit}>Edit</button>
+                  </form>
+                </div>
+                :
+                <div></div>
+              }
             </div>
           </div>
         :

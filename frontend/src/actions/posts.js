@@ -1,4 +1,4 @@
-import { postVote, writePost, deletePost, getPost } from '../API.js'
+import { postVote, writePost, deletePost, getPost, editPost } from '../API.js'
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_POST = 'RECEIVE_POST'
@@ -8,6 +8,7 @@ export const NEW_POST = 'NEW_POST'
 export const SORT_POSTS = 'SORT_POSTS'
 export const DELETE_POST = 'DELETE_POST'
 export const GET_POST = 'GET_POST'
+export const EDIT_POST = 'EDIT_POST'
 
 export function receivePosts (posts) {
   return {
@@ -103,6 +104,22 @@ export function handleGetPost(id){
     return getPost(id)
     .then(post => {
       dispatch(addPost(post))
+    })
+  }
+}
+
+export function editedPost(post) {
+  return{
+    type: EDIT_POST,
+    post,
+  }
+}
+
+export function handleEditPost(id, title, body){
+  return(dispatch) => {
+    return editPost(id, title, body)
+    .then(post => {
+      dispatch(editedPost(post))
     })
   }
 }
