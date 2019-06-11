@@ -4,7 +4,8 @@ import { VOTE_POST } from '../actions/posts'
 import { SORT_CATEGORIE } from '../actions/posts'
 import { NEW_POST } from '../actions/posts'
 import { SORT_POSTS } from '../actions/posts'
-
+import { DELETE_POST } from '../actions/posts'
+import {GET_POST} from '../actions/posts'
 
 export default function posts (state = {}, action) {
   switch (action.type) {
@@ -32,6 +33,12 @@ export default function posts (state = {}, action) {
 
       case SORT_POSTS:
         return action.posts
+
+      case DELETE_POST:
+        return action.posts
+
+      case GET_POST:
+        return action.post
 
     default:
       return state

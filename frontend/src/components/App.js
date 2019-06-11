@@ -3,6 +3,7 @@ import CommentPage from './CommentPage'
 import Nav from './Nav'
 import Dashboard from './Dashboard'
 import Comment from './Comment'
+import PostPage from './PostPage'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
@@ -22,7 +23,8 @@ class App extends Component {
             ? null
             :
             <div>
-              <Route path='/' component={Dashboard} />
+              <Route exact path='/' component={Dashboard} />
+              <Route path='/post' component={PostPage} />
             </div>
           }
         </div>

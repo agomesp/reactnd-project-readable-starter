@@ -66,3 +66,16 @@ export const writePost = (id, author, title, body, category, timestamp) =>
 		})
 	}).then(res => res.json())
     .then(post => post)
+
+export const deletePost = (id) =>
+	fetch(`${api}/posts/${id}`, {
+		method: 'DELETE',
+		headers: {
+			...headers,
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			id
+		})
+	}).then(res => res.json())
+    .then(post => post)

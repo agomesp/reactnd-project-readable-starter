@@ -1,4 +1,4 @@
-import { postVote, writePost } from '../API.js'
+import { postVote, writePost, deletePost, getPost } from '../API.js'
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_POST = 'RECEIVE_POST'
@@ -6,6 +6,8 @@ export const VOTE_POST = 'VOTE_POST'
 export const SORT_CATEGORIE = 'SORT_CATEGORIE'
 export const NEW_POST = 'NEW_POST'
 export const SORT_POSTS = 'SORT_POSTS'
+export const DELETE_POST = 'DELETE_POST'
+export const GET_POST = 'GET_POST'
 
 export function receivePosts (posts) {
   return {
@@ -54,10 +56,8 @@ export function newPost(post){
 
 export function handleWrite(id, name, body, category, title){
   return(dispatch) => {
-            console.log('write:', id, name, title, body, category, JSON.stringify(Date.now()))
     return writePost(id, name, title, body, category,   Date.now())
       .then(post => {
-
         dispatch(newPost(post))
       })
     }
@@ -72,4 +72,37 @@ export function sortPost(posts){
 
 export function handleSortDate(posts){
   return(dispatch) => (dispatch(sortPost(posts)))
+}
+
+export function dltPost (posts){
+  return{
+    type: DELETE_POST,
+    posts
+  }
+}
+
+export function handleDeletePost(posts, id){
+  return(dispatch) => {
+    return deletePost(id)
+    .then(post => {
+      console.log(id)
+      console.log('posts without:', posts)
+      dispatch(dltPost(posts))
+    })
+}}
+
+export function addPost(post) {
+  return{
+    type: GET_POST,
+    post
+  }
+}
+
+export function handleGetPost(id){
+  return(dispatch) => {
+    return getPost(id)
+    .then(post => {
+      dispatch(addPost(post))
+    })
+  }
 }
