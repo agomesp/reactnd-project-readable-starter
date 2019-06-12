@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { formatDate } from '../helpers.js'
 import { handleVote, handleDeletePost, handleGetPost, handleEditPost} from '../actions/posts'
 import { Link, withRouter } from 'react-router-dom'
+import { handlePostAndComments } from '../actions/shared'
 
 class Post extends Component {
   state = {
@@ -28,7 +29,7 @@ class Post extends Component {
   }
 
   processPost = (e) => {
-    this.props.dispatch(handleGetPost(this.props.post.id))
+    this.props.dispatch(handlePostAndComments(this.props.post.id))
   }
 
   showEdit = (e) => {
@@ -85,9 +86,10 @@ class Post extends Component {
   }
 }
 
-function mapStateToProps({ posts }) {
+function mapStateToProps({ posts, comments }) {
   return {
-    posts
+    posts,
+    comments
   }
 }
 

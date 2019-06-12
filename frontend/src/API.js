@@ -25,10 +25,20 @@ export function getInitialData () {
   }))
 }
 
+export function getPostAndComments(id) {
+  return Promise.all ([
+    getPost(id),
+    getComments(id),
+  ]).then(([post, comments]) => ({
+      post,
+      comments
+  }))
+}
+
 export const getPost = (id) =>
   fetch(`${api}/posts/${id}`, { headers })
     .then(res => res.json())
-    .then(data => data)
+    .then(post => post)
 
 
 export const postVote = (id, option) =>
@@ -94,3 +104,8 @@ export const editPost = (id, title, body) =>
     })
   }).then(res => res.json())
     .then(post => post)
+
+export const getComments = (id) =>
+  fetch(`${api}/posts/${id}/comments`, { headers })
+    .then(res => res.json())
+    .then(data => data)

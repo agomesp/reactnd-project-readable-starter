@@ -46,7 +46,6 @@ export default function posts (state = {}, action) {
           ...state.map(item => {
             if(item.id === action.post.id) return action.post
             return item
-            // item.id === action.post.id ? action.post : item
           })
         ]
 

@@ -4,15 +4,11 @@ import { formatDate } from '../helpers.js'
 import { handleVote, handleDeletePost, handleGetPost } from '../actions/posts'
 
 class Post extends Component {
-
-  componentWillMount(){
-    console.log('hi9', this.props)
-  }
-
   render(){
     const post = this.props.posts
+    const comments = this.props.comments
+    console.log(comments)
     return(
-
           <div className='post'>
             <div className='title-ctg'>
               <p className='title-post'>{post.title} - by {post.author}</p>
@@ -25,14 +21,22 @@ class Post extends Component {
             <div className='bottom-post'>
               <span>{post.commentCount} comments</span>
             </div>
+            {comments.map((comment) => {
+              return (<div>
+                <p>{comment.body}</p>
+                <p>by - {comment.author}</p>
+                <hr/>
+              </div>)
+            })}
           </div>
     )
   }
 }
 
-function mapStateToProps({ posts }) {
+function mapStateToProps({ posts, comments }) {
   return {
-    posts
+    posts,
+    comments
   }
 }
 
