@@ -35,7 +35,7 @@ class Nav extends Component {
     return (
       <div>
         <div className='head'>
-          <a href='http://localhost:3000'><h1>READABLE</h1></a>
+          <a href='/'><h1>READABLE</h1></a>
         </div>
         <div className='nav'>
           <span className='selected' onClick={this.handleSort}>New</span>

@@ -14,14 +14,17 @@ export default function posts (state = {}, action) {
       return action.posts
 
       case VOTE_POST:
-        console.log('ação, votepost:', action)
-        return [
-          ...state.map(item => {
-            if(item.id === action.post.id) return action.post
-            return item
-            // item.id === action.post.id ? action.post : item
-          })
-        ]
+        if (state.map) {
+          return [
+            ...state.map(item => {
+              if(item.id === action.post.id) return action.post
+              return item
+              // item.id === action.post.id ? action.post : item
+            })
+          ]
+        } else {
+          return state
+        }
 
       case SORT_CATEGORIE:
         return action.posts
@@ -42,12 +45,17 @@ export default function posts (state = {}, action) {
         return action.post
 
       case EDIT_POST:
-        return [
-          ...state.map(item => {
-            if(item.id === action.post.id) return action.post
-            return item
-          })
-        ]
+        if(state.map){
+          return [
+            ...state.map(item => {
+              if(item.id === action.post.id) return action.post
+              return item
+            })
+          ]
+        }else{
+          return action.post
+        }
+
 
     default:
       return state

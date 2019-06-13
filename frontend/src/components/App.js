@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Link, withRouter} from 'react-router-dom'
 
 class App extends Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.dispatch(handleInitialData())
   }
 
@@ -25,6 +25,9 @@ class App extends Component {
             <div>
               <Route exact path='/' component={Dashboard} />
               <Route path='/post' component={PostPage} />
+              <Route path='/react' component={Dashboard} />
+              <Route path='/redux' component={Dashboard} />
+              <Route path='/udacity' component={Dashboard} />
             </div>
           }
         </div>

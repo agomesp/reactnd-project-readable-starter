@@ -1,24 +1,37 @@
 import React, { Component } from 'react';
+import { handleVoteComment } from '../actions/comments'
+import { connect } from 'react-redux'
 
 class Comment extends Component {
+
+  state = {
+    lastOption: ''
+  }
+
+  processVoteComment = (e)  => {
+    const id = this.props.comment.id
+    const option = e.currentTarget.value
+
+    if(this.state.lastOption === '' || this.state.lastOption !== option){
+      this.props.dispatch(handleVoteComment(id, option))
+      this.setState({lastOption: option})
+    }
+
+  }
+
   render() {
+    const comment = this.props.comment
     return (
-      <div className='post'>
-        <div className='title-ctg'>
-          <p className='title-post'>Name</p>
-          <p className='date-post'>Wed 02/03/2019</p>
-          <ul>
-            <li>category</li>
-          </ul>
-        </div>
-        <p className='post-text'>Text</p>
-        <div className='bottom-post'>
-          <span className='upvote'>^</span><span className='vote'> 2 </span><span className='downvote'>v</span>
-          <p><span className='edit-post'>edit</span> | <span>delete</span></p>
-        </div>
+      <div>
+        <p>{comment.body}</p>
+        <p>by - {comment.author}</p>
+        <button className='upvote' onClick={this.processVoteComment} value='upVote'>^</button>
+        <span className='vote'> {comment.voteScore} </span>
+        <button className='downvote' value='downVote' onClick={this.processVoteComment}>v</button>
+        <hr/>
       </div>
     );
   }
 }
 
-export default Comment;
+export default connect()(Comment)

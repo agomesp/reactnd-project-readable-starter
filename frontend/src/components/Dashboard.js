@@ -3,16 +3,20 @@ import { connect } from 'react-redux'
 import Comment from './Comment'
 import Post from './Post'
 import { handleSortCategorie } from '../actions/categories'
+import { handleInitialData } from '../actions/shared.js'
 
 class Dashboard extends Component {
   state = {
     hasRoute: false
   }
 
+  componentWillMount(){
+        this.props.dispatch(handleInitialData())
+  }
+
   componentDidUpdate(){
     const location = this.props.history.location.pathname.replace('/', '')
     if(this.props.history.location.pathname !== '/' && this.state.hasRoute === false){
-      console.log('executando', location)
       this.props.dispatch(handleSortCategorie(location))
       this.setState({hasRoute: true})
     }
@@ -21,7 +25,6 @@ class Dashboard extends Component {
   render() {
     const posts = this.props.posts
     const categories = this.props.categories
-    console.log('test2:', this.props.history.location.pathname)
     return (
       <ul className='ul-posts'>
       {Object.keys(posts).map((key) => (
