@@ -123,3 +123,20 @@ export const commentVote = (id, option) =>
 		})
 	}).then(res => res.json())
 .then(post => post)
+
+export const writeComment = (id, timestamp, body, author, parentId) =>
+	fetch(`${api}/comments`, {
+		method: 'POST',
+		headers: {
+			...headers,
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			id,
+      timestamp,
+      body,
+      author,
+      parentId
+		})
+	}).then(res => res.json())
+    .then(post => post)

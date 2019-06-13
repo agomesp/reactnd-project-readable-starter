@@ -4,11 +4,13 @@ import { connect } from 'react-redux'
 import { formatDate } from '../helpers.js'
 import { handleVote, handleDeletePost, handleGetPost, handleEditPost } from '../actions/posts'
 import { handlePostAndComments } from '../actions/shared.js'
+import { withRouter } from 'react-router-dom'
+import { handleWrite } from '../actions/comments.js'
 
 class Post extends Component {
   state = {
     lastOption: '',
-    editing: false
+    editing: false,
   }
 
   processVote = (e)  => {
@@ -24,9 +26,10 @@ class Post extends Component {
   }
 
   processDelete = (e) => {
-    const posts = Object.keys(this.props.posts).map((key) => this.props.posts[key].id !== this.props.post.id ? this.props.posts[key] : false)
+    const posts = Object.keys(this.props.posts).map((key) => this.props.posts[key].id !== this.props.posts.id ? this.props.posts[key] : false)
     console.log('postswww:', posts)
-    this.props.dispatch(handleDeletePost(posts, this.props.post.id))
+    this.props.dispatch(handleDeletePost(posts, this.props.posts.id))
+    this.props.history.push('/')
   }
 
   showEdit = (e) => {
@@ -41,6 +44,17 @@ class Post extends Component {
     const title = document.getElementsByClassName('input-subject')[0].value
     console.log('testinga', id, body, title)
     this.props.dispatch(handleEditPost(id, title, body))
+  }
+
+  processPostComment = (e) => {
+    e.preventDefault()
+
+    const id = Math.random() * Date.now()
+    const author = document.getElementsByClassName('input-name')[0].value
+    const body = document.getElementsByClassName('input-text')[0].value
+    const parentId = this.props.posts.id
+
+    this.props.dispatch(handleWrite(id, Date.now(), body, author, parentId))
   }
 
   componentWillMount() {
@@ -82,6 +96,7 @@ class Post extends Component {
             })}
             <form>
               <label>Text:</label><input type='text' className='input-text'></input>
+              <label>Author:</label><input type='text' className='input-name'></input>
               <button className='bnt-Submit' onClick={this.processPostComment}>Comment</button>
             </form>
           </div>
@@ -96,4 +111,4 @@ function mapStateToProps({ posts, comments }) {
   }
 }
 
-export default connect(mapStateToProps)(Post)
+export default withRouter(connect(mapStateToProps)(Post))
