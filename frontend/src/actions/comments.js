@@ -1,9 +1,10 @@
-import { getPostAndComments, commentVote, writeComment, editComment } from '../API.js'
+import { getPostAndComments, commentVote, writeComment, editComment, deleteComment } from '../API.js'
 
 export const ADD_COMMENT = 'ADD_COMMENT'
 export const VOTE_COMMENT = 'VOTE_COMMENT'
 export const NEW_COMMENT = 'NEW_COMMENT'
 export const EDIT_COMMENT = 'EDIT_COMMENT'
+export const DELETE_COMMENT = 'DELETE_COMMENT'
 
 
 export function newComment(comment){
@@ -62,3 +63,19 @@ export function handleEditComment(id, text){
     })
   }
 }
+
+export function dltComment (comments){
+  return{
+    type: DELETE_COMMENT,
+    comments
+  }
+}
+
+export function handleDeleteComment(comments, id){
+  return(dispatch) => {
+    return deleteComment(id)
+    .then(comment => {
+      console.log('auuuuu', comment, comments)
+      dispatch(dltComment(comments))
+    })
+}}

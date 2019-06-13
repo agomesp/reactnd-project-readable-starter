@@ -27,7 +27,6 @@ class Post extends Component {
 
   processDelete = (e) => {
     const posts = Object.keys(this.props.posts).map((key) => this.props.posts[key].id !== this.props.posts.id ? this.props.posts[key] : false)
-    console.log('postswww:', posts)
     this.props.dispatch(handleDeletePost(posts, this.props.posts.id))
     this.props.history.push('/')
   }
@@ -91,7 +90,7 @@ class Post extends Component {
               }
             </div>
             {comments.map((comment) => {
-              return (<Comment comment={comment} key={comment.id}/>)
+              return (<div key={comment.id}><Comment comment={comment}/></div>)
             })}
             <form>
               <label>Text:</label><input type='text' className='input-text'></input>

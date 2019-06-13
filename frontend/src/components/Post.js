@@ -24,7 +24,6 @@ class Post extends Component {
 
   processDelete = (e) => {
     const posts = Object.keys(this.props.posts).map((key) => this.props.posts[key].id !== this.props.post.id ? this.props.posts[key] : false)
-    console.log('postswww:', posts)
     this.props.dispatch(handleDeletePost(posts, this.props.post.id))
   }
 

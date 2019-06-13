@@ -1,4 +1,4 @@
-import { ADD_COMMENT, VOTE_COMMENT, NEW_COMMENT, EDIT_COMMENT } from '../actions/comments'
+import { ADD_COMMENT, VOTE_COMMENT, NEW_COMMENT, EDIT_COMMENT, DELETE_COMMENT } from '../actions/comments'
 
 export default function comments (state = [], action) {
   switch (action.type) {
@@ -34,6 +34,9 @@ export default function comments (state = [], action) {
         }else{
           return action.comment
         }
+
+      case DELETE_COMMENT:
+        return action.comments
 
     default:
       return state

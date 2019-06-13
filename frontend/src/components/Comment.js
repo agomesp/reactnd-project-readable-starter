@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { handleVoteComment, handleEditComment } from '../actions/comments'
+import { handleVoteComment, handleEditComment, handleDeleteComment } from '../actions/comments'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 class Comment extends Component {
 
@@ -31,9 +32,16 @@ class Comment extends Component {
     this.props.dispatch(handleEditComment(id, body))
   }
 
+  processDelete = (e) => {
+    console.log(this.props.comments)
+    const comments = this.props.comments.map((comment) => comment.id !== this.props.comment.id ? comment : false)
+    this.props.dispatch(handleDeleteComment(comments, this.props.comment.id))
+  }
+
   render() {
     const comment = this.props.comment
     return (
+      comment != false ?
       <div>
         <p>{comment.body}</p>
         <p>by - {comment.author}</p>
@@ -56,8 +64,16 @@ class Comment extends Component {
         }
         <hr/>
       </div>
+      :
+      <div></div>
     );
   }
 }
 
-export default connect()(Comment)
+function mapStateToProps({ comments }) {
+  return {
+    comments
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(Comment))
