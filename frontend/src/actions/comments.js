@@ -1,8 +1,9 @@
-import { getPostAndComments, commentVote, writeComment } from '../API.js'
+import { getPostAndComments, commentVote, writeComment, editComment } from '../API.js'
 
 export const ADD_COMMENT = 'ADD_COMMENT'
 export const VOTE_COMMENT = 'VOTE_COMMENT'
 export const NEW_COMMENT = 'NEW_COMMENT'
+export const EDIT_COMMENT = 'EDIT_COMMENT'
 
 
 export function newComment(comment){
@@ -43,5 +44,21 @@ export function handleVoteComment(id, option){
       .then( comment => {
         dispatch(voteComment(comment))
       })
+  }
+}
+
+export function editedComment(comment){
+  return{
+    type: EDIT_COMMENT,
+    comment
+  }
+}
+
+export function handleEditComment(id, text){
+  return(dispatch) => {
+    return editComment(id, text)
+    .then(comment => {
+      dispatch(editedComment(comment))
+    })
   }
 }

@@ -42,7 +42,6 @@ class Post extends Component {
     const id = this.props.posts.id
     const body = document.getElementsByClassName('input-text')[0].value
     const title = document.getElementsByClassName('input-subject')[0].value
-    console.log('testinga', id, body, title)
     this.props.dispatch(handleEditPost(id, title, body))
   }
 

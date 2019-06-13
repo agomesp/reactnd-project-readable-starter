@@ -139,4 +139,19 @@ export const writeComment = (id, timestamp, body, author, parentId) =>
       parentId
 		})
 	}).then(res => res.json())
-    .then(post => post)
+    .then(comment => comment)
+
+
+export const editComment = (id, body) =>
+  fetch(`${api}/comments/${id}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      id,
+      body
+    })
+  }).then(res => res.json())
+    .then(comment => comment)
