@@ -1,4 +1,4 @@
-import { getPostAndComments, commentVote, writeComment, editComment, deleteComment } from '../API.js'
+import { commentVote, writeComment, editComment, deleteComment } from '../API.js'
 
 export const ADD_COMMENT = 'ADD_COMMENT'
 export const VOTE_COMMENT = 'VOTE_COMMENT'

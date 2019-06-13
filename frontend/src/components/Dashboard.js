@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import Comment from './Comment'
 import Post from './Post'
 import { handleSortCategorie } from '../actions/categories'
 import { handleInitialData } from '../actions/shared.js'
@@ -24,7 +23,6 @@ class Dashboard extends Component {
 
   render() {
     const posts = this.props.posts
-    const categories = this.props.categories
     return (
       <ul className='ul-posts'>
       {Object.keys(posts).map((key) => (

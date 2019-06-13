@@ -41,7 +41,7 @@ class Comment extends Component {
   render() {
     const comment = this.props.comment
     return (
-      comment != false ?
+      comment !== false ?
       <div>
         <p>{comment.body}</p>
         <p>by - {comment.author}</p>

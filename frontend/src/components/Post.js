@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { formatDate } from '../helpers.js'
-import { handleVote, handleDeletePost, handleGetPost, handleEditPost} from '../actions/posts'
+import { handleVote, handleDeletePost, handleEditPost} from '../actions/posts'
 import { Link, withRouter } from 'react-router-dom'
 import { handlePostAndComments } from '../actions/shared'
 

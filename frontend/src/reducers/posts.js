@@ -1,5 +1,4 @@
 import { RECEIVE_POSTS } from '../actions/posts'
-import { RECEIVE_POST } from '../actions/posts'
 import { VOTE_POST } from '../actions/posts'
 import { SORT_CATEGORIE } from '../actions/posts'
 import { NEW_POST } from '../actions/posts'
