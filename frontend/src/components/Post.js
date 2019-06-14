@@ -46,7 +46,6 @@ class Post extends Component {
   }
 
   render(){
-    console.log('props:', this.props)
     const post = this.props.post
     return(
       post !== false ?

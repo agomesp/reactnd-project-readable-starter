@@ -75,7 +75,6 @@ export function handleDeleteComment(comments, id){
   return(dispatch) => {
     return deleteComment(id)
     .then(comment => {
-      console.log('auuuuu', comment, comments)
       dispatch(dltComment(comments))
     })
 }}

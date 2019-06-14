@@ -10,23 +10,12 @@ export function receiveCategories (categories) {
   }
 }
 
-// export function sortedCategories(posts){
-//   return{
-//     type: SORT_CATEGORIE,
-//     posts
-//   }
-// }
 
 export function handleSortCategorie(categorie){
   return (dispatch) => {
     return getPostCategorie(categorie)
       .then( posts => {
-        console.log('posts from categorie:', posts)
         dispatch(sortedCategories(posts))
       })
-//       .then( data => {
-//   console.log('data:', data) // <----
-//   // dispatch(votePost(posts))
-// })
   }
 }

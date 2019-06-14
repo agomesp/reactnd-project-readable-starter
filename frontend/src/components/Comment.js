@@ -33,7 +33,6 @@ class Comment extends Component {
   }
 
   processDelete = (e) => {
-    console.log(this.props.comments)
     const comments = this.props.comments.map((comment) => comment.id !== this.props.comment.id ? comment : false)
     this.props.dispatch(handleDeleteComment(comments, this.props.comment.id))
   }

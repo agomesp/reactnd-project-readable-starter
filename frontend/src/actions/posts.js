@@ -35,7 +35,6 @@ export function handleVote(id, option){
   return (dispatch) => {
     return postVote(id, option)
       .then( post => {
-        console.log('posts:', post)
         dispatch(votePost(post))
       })
   }
@@ -86,8 +85,6 @@ export function handleDeletePost(posts, id){
   return(dispatch) => {
     return deletePost(id)
     .then(post => {
-      console.log(id)
-      console.log('posts without:', posts)
       dispatch(dltPost(posts))
     })
 }}
