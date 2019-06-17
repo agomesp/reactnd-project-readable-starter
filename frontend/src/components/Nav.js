@@ -8,7 +8,9 @@ import { handleSortDate } from '../actions/posts'
 class Nav extends Component {
   state = {
     writeClicked: false,
-    sorted: false
+    sorted: false,
+    sortedNew: false,
+    sortedOld: false,
   }
 
   handleWriteClick = (e) => {
@@ -19,8 +21,16 @@ class Nav extends Component {
   handleSort = (e) => {
     e.preventDefault()
     const posts = this.props.posts
-    const postsSorted = Object.keys(posts).sort((a,b) => posts[b].timestamp - posts[a].timestamp)
+    let postsSorted = posts
+    if(this.state.sortedNew) {
+      this.setState({sortedNew: false, sortedOld: true})
+       postsSorted = Object.keys(posts).sort((a,b) => posts[a].timestamp - posts[b].timestamp)
+        .map((key) => posts[key])
+    } else {
+      this.setState({sortedNew: true, sortedOld: false})
+       postsSorted = Object.keys(posts).sort((a,b) => posts[b].timestamp - posts[a].timestamp)
       .map((key) => posts[key])
+    }
 
     this.props.dispatch(handleSortDate(postsSorted))
   }
@@ -38,7 +48,7 @@ class Nav extends Component {
           <a href='/'><h1>READABLE</h1></a>
         </div>
         <div className='nav'>
-          <span className='selected' onClick={this.handleSort}>New</span>
+          <span className='selected' onClick={this.handleSort}>Sort by Date</span>
           <div className='container-btn-category'>
             {Object.keys(categories).map((key) => (
               <Link to={`/${categories[key].path}`} key={key}>
