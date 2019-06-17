@@ -158,3 +158,9 @@ button:hover{
 .bottom-post span:hover{
   cursor: pointer;
 }
+
+.error-404{
+  margin-top: 300px;
+  color: red;
+  text-align: center;
+}

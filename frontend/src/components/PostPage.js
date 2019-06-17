@@ -64,7 +64,9 @@ class Post extends Component {
   render(){
     const post = this.props.posts
     const comments = this.props.comments
+    console.log('aa', post)
     return(
+        post.error !== "There was an error." ?
           <div className='post'>
             <div className='title-ctg'>
               <p className='title-post'>{post.title} - by {post.author}</p>
@@ -100,6 +102,11 @@ class Post extends Component {
               <label>Author:</label><input type='text' className='input-name'></input>
               <button className='bnt-Submit' onClick={this.processPostComment}>Comment</button>
             </form>
+          </div>
+          :
+          <div className='error-404'>
+            <h1>ERROR 404</h1>
+            <p>Post not found - Go Back to The home Page</p>
           </div>
     )
   }
