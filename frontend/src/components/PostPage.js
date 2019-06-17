@@ -20,7 +20,8 @@ class Post extends Component {
     if(this.state.lastOption === '' || this.state.lastOption !== option){
       this.props.dispatch(handleVote(id, option))
       this.setState({lastOption: option})
-      this.props.dispatch(handleGetPost(this.props.history.location.pathname.replace('/post/', '')))
+    const location = this.props.history.location.pathname.substring(this.props.history.location.pathname.indexOf("/") + 1)
+      this.props.dispatch(handleGetPost(location.substring(location.indexOf("/") + 1)))
     }
 
   }
@@ -56,7 +57,8 @@ class Post extends Component {
   }
 
   componentWillMount() {
-    this.props.dispatch(handlePostAndComments(this.props.history.location.pathname.replace('/post/', '')))
+    const location = this.props.history.location.pathname.substring(this.props.history.location.pathname.indexOf("/") + 1)
+    this.props.dispatch(handlePostAndComments(location.substring(location.indexOf("/") + 1)))
   }
 
   render(){
@@ -75,7 +77,7 @@ class Post extends Component {
             <div className='bottom-post'>
               <button className='upvote' onClick={this.processVote} value='upVote'>^</button><span className='vote'> {post.voteScore} </span><button className='downvote' value='downVote' onClick={this.processVote}>v</button>
               <span>{post.commentCount} comments</span>
-              <p><span className='edit-post' onClick={this.showEdit}>edit</span> | <span onClick={this.processDelete}>delete</span></p>
+              <p><span className='edit-post' onClick={this.showEdit}>EDIT POST</span> | <span onClick={this.processDelete}>DELETE POST</span></p>
               {this.state.editing === true
                 ?
                 <div>
@@ -88,6 +90,7 @@ class Post extends Component {
                 :
                 <div></div>
               }
+              <hr/>
             </div>
             {comments.map((comment) => {
               return (<div key={comment.id}><Comment comment={comment}/></div>)

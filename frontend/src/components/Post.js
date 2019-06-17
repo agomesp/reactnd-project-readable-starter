@@ -51,7 +51,7 @@ class Post extends Component {
       post !== false ?
           <div className='post'>
             <div className='title-ctg'>
-              <Link to={`/post/${post.id}`}>
+              <Link to={`/${post.category}/${post.id}`}>
                 <p className='title-post' onClick={this.processPost}>{post.title} - by {post.author}</p>
               </Link>
               <p className='date-post'>{formatDate(post.timestamp)}</p>
